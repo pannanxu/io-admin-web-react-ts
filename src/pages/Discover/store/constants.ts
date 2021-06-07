@@ -1,4 +1,4 @@
-import {IMenu} from "@/types/IDiscover";
+import {IMenu} from "@/models/IDiscover";
 
 export const MENUS_CONSTANTS = 'discover/menus'
 

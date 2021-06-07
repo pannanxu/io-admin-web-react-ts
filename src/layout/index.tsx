@@ -4,10 +4,10 @@ import Main from "./main";
 import Footer from "./footer";
 
 import {renderRoutes} from "@/utils/renderRoutes";
-import {IRouterType} from "@/types/IRouterType";
+import {IResorce} from "@/models/IResorce";
 
 interface IRoute {
-    routers: IRouterType[]
+    routers: IResorce[]
 }
 
 interface IProps {

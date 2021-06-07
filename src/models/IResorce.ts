@@ -1,5 +1,5 @@
 
-export interface IRouterType {
+export interface IResorce {
     key?: string;
     path: string;
     component: any;
@@ -11,5 +11,5 @@ export interface IRouterType {
         title?: string;
         roles?: string[];
     }
-    routers?: IRouterType[];
+    routers?: IResorce[];
 }

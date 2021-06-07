@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux'
 import * as actionTypes from './constants'
 
-import {IMenu} from "@/types/IDiscover";
+import {IMenu} from "@/models/IDiscover";
 
 const changeMenusAction = (menus: IMenu[]) => ({
     type: actionTypes.MENUS_CONSTANTS,

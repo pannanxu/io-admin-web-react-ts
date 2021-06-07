@@ -1,7 +1,7 @@
 // Map 浅层比较
 import {Map} from 'immutable'
 
-import {IMenu} from "@/types/IDiscover";
+import {IMenu} from "@/models/IDiscover";
 import {
     MENUS_CONSTANTS, MenusAction
 } from './constants'

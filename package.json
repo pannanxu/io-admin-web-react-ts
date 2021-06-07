@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "immutable": "^4.0.0-rc.12",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",

@@ -6,8 +6,7 @@ import {Dispatch} from 'redux'
 import {connect, useDispatch, useSelector, shallowEqual} from 'react-redux';
 import * as actionTypes from './store/constants'
 
-import {IMenu} from "@/types/IDiscover";
-
+import {IMenu} from "@/models/IDiscover";
 const Discover: React.FC = (): React.ReactElement => {
 
     let dispatch: Dispatch = useDispatch();
