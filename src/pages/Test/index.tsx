@@ -1,11 +1,9 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
-const Test: React.FC = (): React.ReactElement => {
-    return (
-        <div>
-            Test
-        </div>
-    );
-};
+const Test: React.FC = (): React.ReactElement => (
+  <div>
+    Test
+  </div>
+)
 
-export default memo(Test);
+export default memo(Test)

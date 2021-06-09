@@ -1,30 +1,34 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useEffect } from 'react'
 
-import {getMenusAction} from "@/pages/Discover/store/action";
+import { getMenusAction } from '@/pages/Discover/store/action'
 
-import {Dispatch} from 'redux'
-import {connect, useDispatch, useSelector, shallowEqual} from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux'
+import { IMenu } from '@/models/IDiscover'
 import * as actionTypes from './store/constants'
 
-import {IMenu} from "@/models/IDiscover";
-const Discover: React.FC = (): React.ReactElement => {
+interface IProperties {
+  dispatch: any;
+}
 
-    let dispatch: Dispatch = useDispatch();
+const Discover: React.FC<IProperties> = ({ dispatch }): React.ReactElement => {
+  const { menus = [] } = useSelector((state: any) => ({
+    menus: state.getIn(['discoverReducer', actionTypes.MENUS_CONSTANTS]) as IMenu[],
+  }), shallowEqual)
 
-    const {menus = []} = useSelector((state: any) => ({
-        menus: state.getIn(['discoverReducer', actionTypes.MENUS_CONSTANTS]) as IMenu[]
-    }), shallowEqual)
+  useEffect(() => {
+    getMenus()
+  }, [])
 
-    useEffect(() => {
-        dispatch(getMenusAction());
-    }, [])
+  const getMenus = () => {
+    dispatch(getMenusAction())
+  }
+  return (
 
-    return (
-        <div>
-            {menus[1]?.name}
-            Discover
-        </div>
-    );
-};
+    <div>
+      {menus[1]?.name}
+      Discover
+    </div>
+  )
+}
 
-export default memo(Discover);
+export default memo(Discover)

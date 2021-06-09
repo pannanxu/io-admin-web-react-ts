@@ -1,5 +1,4 @@
-
 export interface IMenu {
-    name: string;
-    path: string;
+  name: string;
+  path: string;
 }

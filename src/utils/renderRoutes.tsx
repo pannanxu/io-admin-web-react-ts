@@ -1,13 +1,13 @@
-import React, {FC, ReactElement} from 'react'
+import React, { FC, ReactElement } from 'react'
 import * as routerDom from 'react-router-dom'
-import {IResorce} from "@/models/IResorce";
+import { IResorce } from '@/models/IResorce'
 
-interface IProps {
-    routers?: IResorce[];
-    authed?: boolean;
-    authPath?: string;
-    extraProps?: any;
-    switchProps?: any;
+interface IProperties {
+  routers?: IResorce[];
+  authed?: boolean;
+  authPath?: string;
+  extraProps?: any;
+  switchProps?: any;
 }
 
 /**
@@ -19,40 +19,40 @@ interface IProps {
  * @param switchProps   参数传递
  * @returns {*}
  */
-const renderRoutes: FC<IProps> = (
-    {
-        routers = [], switchProps = {}, authPath = '/login', authed = false, extraProps = {}
-    }
+const renderRoutes: FC<IProperties> = (
+  {
+    routers = [], switchProps: switchProperties = {}, authPath = '/login', authed = false, extraProps: extraProperties = {},
+  },
 ): ReactElement => (
-    <routerDom.Switch {...switchProps}>
-        {
-            routers.map(
-                (route, i: number) => (
-                    <routerDom.Route
-                        key={route.key || i}
-                        path={route.path}
-                        exact={route.exact}
-                        strict={route.strict}
-                        render={
-                            props => {
-                                // 如果需要重定向, 并且是免授权的
-                                if (route.redirect && !route.meta?.requiresAuth) {
-                                    return <routerDom.Redirect to={{pathname: route.redirect}}/>
-                                }
-                                // 授权成功后进入组件
-                                if (!route.meta?.requiresAuth || authed || route.path === authPath) {
-                                    return <route.component {...props} {...extraProps} route={route}/>
-                                }
-                                return <routerDom.Redirect to={{pathname: authPath, state: {from: props.location}}}/>
-                            }
-                        }
-                    />
-                )
-            )
-        }
-    </routerDom.Switch>
+  <routerDom.Switch {...switchProperties}>
+    {
+      routers.map(
+        (route, index: number) => (
+          <routerDom.Route
+            key={route.key || index}
+            path={route.path}
+            exact={route.exact}
+            strict={route.strict}
+            render={
+              (properties) => {
+                // 如果需要重定向, 并且是免授权的
+                if (route.redirect && !route.meta?.requiresAuth) {
+                  return <routerDom.Redirect to={{ pathname: route.redirect }}/>
+                }
+                // 授权成功后进入组件
+                if (!route.meta?.requiresAuth || authed || route.path === authPath) {
+                  return <route.component {...properties} {...extraProperties} route={route}/>
+                }
+                return <routerDom.Redirect to={{ pathname: authPath, state: { from: properties.location } }}/>
+              }
+            }
+          />
+        ),
+      )
+    }
+  </routerDom.Switch>
 )
 
 export {
-    renderRoutes
+  renderRoutes,
 }

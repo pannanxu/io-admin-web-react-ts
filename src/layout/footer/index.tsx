@@ -1,12 +1,10 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react'
 
-interface IProps {}
+interface IProperties {
+}
 
-const Footer: React.FC<IProps> = (props: IProps): React.ReactElement => {
-    return (
-        <div>
-        </div>
-    );
-};
+const Footer: React.FC<IProperties> = (properties: IProperties): React.ReactElement => (
+  <div/>
+)
 
-export default memo(Footer);
+export default memo(Footer)

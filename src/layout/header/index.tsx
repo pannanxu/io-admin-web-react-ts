@@ -1,13 +1,10 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react'
 
-interface IProps {}
+interface IProperties {
+}
 
-const Header: React.FC<IProps> = (props: IProps): React.ReactElement => {
-    return (
-        <div>
+const Header: React.FC<IProperties> = (properties: IProperties): React.ReactElement => (
+  <div/>
+)
 
-        </div>
-    );
-};
-
-export default memo(Header);
+export default memo(Header)
