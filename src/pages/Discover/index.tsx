@@ -7,13 +7,16 @@ import { IMenu } from '@/models/IDiscover'
 import * as actionTypes from './store/constants'
 
 interface IProperties {
-  dispatch: any;
+  dispatch: any
 }
 
 const Discover: React.FC<IProperties> = ({ dispatch }): React.ReactElement => {
-  const { menus = [] } = useSelector((state: any) => ({
-    menus: state.getIn(['discoverReducer', actionTypes.MENUS_CONSTANTS]) as IMenu[],
-  }), shallowEqual)
+  const { menus = [] } = useSelector(
+    (state: any) => ({
+      menus: state.getIn(['discoverReducer', actionTypes.MENUS_CONSTANTS]) as IMenu[],
+    }),
+    shallowEqual,
+  )
 
   useEffect(() => {
     getMenus()
@@ -23,7 +26,6 @@ const Discover: React.FC<IProperties> = ({ dispatch }): React.ReactElement => {
     dispatch(getMenusAction())
   }
   return (
-
     <div>
       {menus[1]?.name}
       Discover

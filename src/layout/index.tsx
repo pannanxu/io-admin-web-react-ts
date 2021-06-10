@@ -22,11 +22,9 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
 
   return (
     <div>
-      <Header/>
-      <Main>
-        {renderRoutes({ routers: route.routers, extraProps: { dispatch } })}
-      </Main>
-      <Footer/>
+      <Header />
+      <Main>{renderRoutes({ routers: route.routers, extraProps: { dispatch } })}</Main>
+      <Footer />
     </div>
   )
 }

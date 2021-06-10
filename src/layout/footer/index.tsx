@@ -1,10 +1,7 @@
 import React, { memo } from 'react'
 
-interface IProperties {
-}
+interface IProperties {}
 
-const Footer: React.FC<IProperties> = (properties: IProperties): React.ReactElement => (
-  <div/>
-)
+const Footer: React.FC<IProperties> = (properties: IProperties): React.ReactElement => <div />
 
 export default memo(Footer)

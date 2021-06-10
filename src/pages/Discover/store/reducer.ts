@@ -2,9 +2,7 @@
 import { Map } from 'immutable'
 
 import { IMenu } from '@/models/IDiscover'
-import {
-  MENUS_CONSTANTS, MenusAction,
-} from './constants'
+import { MENUS_CONSTANTS, MenusAction } from './constants'
 
 const defaultState = Map({
   menus: [

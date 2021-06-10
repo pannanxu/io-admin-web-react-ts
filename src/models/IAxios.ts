@@ -7,15 +7,15 @@ export interface IResponse<T> {
   /**
    * 响应码
    */
-  readonly code: number;
+  readonly code: number
   /**
    * 响应信息
    */
-  readonly msg: string;
+  readonly msg: string
   /**
    * 响应数据
    */
-  data: AxiosPromise<T>;
+  data: AxiosPromise<T>
 }
 
 /**
@@ -25,21 +25,21 @@ export interface IRequest<T> {
   /**
    * URL
    */
-  url: string;
+  url: string
   /**
    * GET Params
    */
-  params?: any;
+  params?: any
   /**
    * POST | PUT Body
    */
-  body?: T;
+  body?: T
   /**
    * headers
    */
-  headers?: any;
+  headers?: any
   /**
    * POST | GET | PUT | DELETE
    */
-  method?: any;
+  method?: any
 }

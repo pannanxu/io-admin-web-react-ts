@@ -6,9 +6,7 @@ interface IProperties {
 
 const Main: React.FC<IProperties> = ({ children }): React.ReactElement => (
   <div>
-    <Suspense fallback={<div>Loading...</div>}>
-      {children}
-    </Suspense>
+    <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
   </div>
 )
 

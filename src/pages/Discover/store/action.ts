@@ -7,9 +7,11 @@ const changeMenusAction = (menus: IMenu[]) => ({
   menus,
 })
 
-export const getMenusAction = (): any => (dispatch: Dispatch) => {
-  dispatch(changeMenusAction([
-    { name: '仪表盘', path: '/discover' },
-    { name: '仪表盘1', path: '/discover1' },
-  ]))
+export const getMenusAction = () => (dispatch: Dispatch) => {
+  dispatch(
+    changeMenusAction([
+      { name: '仪表盘', path: '/discover' },
+      { name: '仪表盘1', path: '/discover1' },
+    ]),
+  )
 }

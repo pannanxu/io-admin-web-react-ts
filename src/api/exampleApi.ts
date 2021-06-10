@@ -1,6 +1,4 @@
-import {
-  http, get, del, post, put,
-} from '@/utils/request'
+import { http, get, del, post, put } from '@/utils/request'
 
 const singlePoetryGet = () => get('/api/singlePoetry')
 
