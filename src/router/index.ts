@@ -1,9 +1,9 @@
 import React from 'react'
 import Layout from '@/layout'
 
-import { IResorce } from '@/models/IResorce'
+import { RouterType } from '@/router/router.type'
 
-const routers: IResorce[] = [
+const routers: RouterType[] = [
   {
     path: '/',
     component: Layout,

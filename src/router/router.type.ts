@@ -1,4 +1,4 @@
-export interface IResorce {
+export interface RouterType {
   key?: string
   path: string
   component: any
@@ -10,5 +10,5 @@ export interface IResorce {
     title?: string
     roles?: string[]
   }
-  routers?: IResorce[]
+  routers?: RouterType[]
 }

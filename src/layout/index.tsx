@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { Layout as LayoutAnt } from 'antd'
 
 import { renderRoutes } from '@/utils/renderRoutes'
-import { IResorce } from '@/models/IResorce'
+import { RouterType } from '@/router/router.type'
 import Side from '@/layout/sider'
 import Main from './main'
 import Footer from './footer'
@@ -13,7 +13,7 @@ import Footer from './footer'
 import { Wrapper } from '@/layout/style'
 
 interface IRoute {
-  routers: IResorce[]
+  routers: RouterType[]
 }
 
 interface IProperties {

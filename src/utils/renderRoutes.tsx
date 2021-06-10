@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react'
 import * as routerDom from 'react-router-dom'
-import { IResorce } from '@/models/IResorce'
+import { RouterType } from '@/router/router.type'
 
 interface IProperties {
-  routers?: IResorce[]
+  routers?: RouterType[]
   authed?: boolean
   authPath?: string
   extraProps?: any

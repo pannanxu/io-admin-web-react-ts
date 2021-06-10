@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosPromise } from 'axios'
-import { IRequest, IResponse } from '@/models/IAxios'
+import { IRequest, IResponse } from '@/utils/request.type'
 
 // https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
 const isDevelopment = import.meta.env.DEV
