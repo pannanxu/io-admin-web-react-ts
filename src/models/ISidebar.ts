@@ -5,49 +5,49 @@ export interface IMenus {
   /**
    * ID,KEY
    */
-  id: number;
+  id: number
   /**
    * 父ID
    */
-  parentId: number;
+  parentId: number
   /**
    * 标题
    */
-  title: string;
+  title: string
   /**
    * 描述
    */
-  description: string;
+  description: string
   /**
    * URI
    */
-  uri: string;
+  uri: string
   /**
    * 标识
    */
-  mark: string;
+  mark: string
   /**
    * 打开方式：_blank,_parent,_self,_top
    */
-  target: string;
+  target: string
   /**
    * ICON图标
    */
-  icon: string;
+  icon: string
   /**
    * 扩展参数
    */
-  params: any;
+  params: any
   /**
    * 是否展示
    */
-  isShow: boolean;
+  isShow: boolean
   /**
    * 是否刷新
    */
-  isRefresh: boolean;
+  isRefresh: boolean
   /**
    * 排序
    */
-  menuSort: number;
+  menuSort: number
 }

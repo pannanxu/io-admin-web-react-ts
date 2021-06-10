@@ -1,14 +1,10 @@
 import React, { memo } from 'react'
 import { Layout, Menu } from 'antd'
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons'
+import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons'
 
 interface IProperties {
-  collapsed: boolean;
-  toggle: any;
+  collapsed: boolean
+  toggle: any
 }
 
 const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement => {
@@ -18,19 +14,19 @@ const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement 
       collapsible
       collapsed={collapsed}
       breakpoint="lg"
-      onBreakpoint={broken => {
+      onBreakpoint={(broken) => {
         toggle(broken)
       }}
     >
-      <div className="logo"/>
+      <div className="logo" />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1" icon={<UserOutlined/>}>
+        <Menu.Item key="1" icon={<UserOutlined />}>
           nav 1
         </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined/>}>
+        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
           nav 2
         </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined/>}>
+        <Menu.Item key="3" icon={<UploadOutlined />}>
           nav 3
         </Menu.Item>
       </Menu>

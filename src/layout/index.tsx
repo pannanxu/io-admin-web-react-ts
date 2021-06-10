@@ -21,18 +21,14 @@ interface IProperties {
 }
 
 const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
-
   const [collapsed, setCollapsed] = useState(false)
   const [marginLeft, setMarginLeft] = useState(220)
 
   const dispatch: Dispatch = useDispatch()
 
-  const toggleFromMain = useCallback(
-    () => {
-      updateCollapsed(collapsed)
-    },
-    [collapsed],
-  )
+  const toggleFromMain = useCallback(() => {
+    updateCollapsed(collapsed)
+  }, [collapsed])
 
   const toggleFromSide = useCallback(
     (prop) => {
@@ -49,18 +45,14 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
   return (
     <Wrapper marginLeft={marginLeft}>
       <LayoutAnt>
-        <Side toggle={toggleFromSide} collapsed={collapsed}/>
+        <Side toggle={toggleFromSide} collapsed={collapsed} />
         <Main toggle={toggleFromMain} collapsed={collapsed}>
-          {
-            renderRoutes(
-              {
-                routers: route.routers,
-                extraProps: { dispatch },
-              },
-            )
-          }
+          {renderRoutes({
+            routers: route.routers,
+            extraProps: { dispatch },
+          })}
         </Main>
-        <Footer/>
+        <Footer />
       </LayoutAnt>
     </Wrapper>
   )
