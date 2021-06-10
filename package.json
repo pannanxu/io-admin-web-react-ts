@@ -9,6 +9,8 @@
     "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.16.2",
     "axios": "^0.21.1",
     "immutable": "^4.0.0-rc.12",
     "react": "^17.0.0",

@@ -8,11 +8,13 @@ import routers from './router'
 
 import store from './store'
 
+import 'antd/dist/antd.css'
+
 function App() {
   return (
     <Provider store={store}>
       {/* 全局css样式 */}
-      <GlobalStyle />
+      <GlobalStyle/>
       <Router>{renderRoutes({ routers })}</Router>
     </Provider>
   )

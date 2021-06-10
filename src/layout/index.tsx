@@ -1,13 +1,16 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useCallback } from 'react'
 
 import { Dispatch } from 'redux'
 import { useDispatch } from 'react-redux'
+import { Layout as LayoutAnt } from 'antd'
 
 import { renderRoutes } from '@/utils/renderRoutes'
 import { IResorce } from '@/models/IResorce'
-import Header from './header'
+import Side from '@/layout/sider'
 import Main from './main'
 import Footer from './footer'
+
+import { Wrapper } from '@/layout/style'
 
 interface IRoute {
   routers: IResorce[]
@@ -18,14 +21,48 @@ interface IProperties {
 }
 
 const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
+
+  const [collapsed, setCollapsed] = useState(false)
+  const [marginLeft, setMarginLeft] = useState(220)
+
   const dispatch: Dispatch = useDispatch()
 
+  const toggleFromMain = useCallback(
+    () => {
+      updateCollapsed(collapsed)
+    },
+    [collapsed],
+  )
+
+  const toggleFromSide = useCallback(
+    (prop) => {
+      updateCollapsed(!prop)
+    },
+    [collapsed],
+  )
+
+  const updateCollapsed = (prop: boolean) => {
+    setCollapsed(!prop)
+    setMarginLeft(prop ? 220 : 100)
+  }
+
   return (
-    <div>
-      <Header />
-      <Main>{renderRoutes({ routers: route.routers, extraProps: { dispatch } })}</Main>
-      <Footer />
-    </div>
+    <Wrapper marginLeft={marginLeft}>
+      <LayoutAnt>
+        <Side toggle={toggleFromSide} collapsed={collapsed}/>
+        <Main toggle={toggleFromMain} collapsed={collapsed}>
+          {
+            renderRoutes(
+              {
+                routers: route.routers,
+                extraProps: { dispatch },
+              },
+            )
+          }
+        </Main>
+        <Footer/>
+      </LayoutAnt>
+    </Wrapper>
   )
 }
 
