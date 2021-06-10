@@ -1,8 +1,7 @@
 # 简介
 
-基于Vite + React + TypeScript实现的权限管理脚手架,
-使用它可以快速帮助我们开发后台管理系统,
-可以实时管理用户的在线状态以及实时管理用户的上下线状态
+基于 Vite + React + TypeScript + antd 实现的权限管理脚手架,
+使用它可以快速帮助我们开发后台管理系统
 
 # 项目结构
 
@@ -44,6 +43,9 @@
 - redux-immutable
 - redux-thunk
 - styled-components
+- axios
+- prettier
+- eslint
 
 # 项目启动
 
@@ -51,6 +53,12 @@
 git clone ...
 yarn -i
 yarn dev
+```
+
+# 格式化代码
+
+```shell
+yarn format
 ```
 
 # 项目打包
