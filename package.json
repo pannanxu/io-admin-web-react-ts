@@ -4,6 +4,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
+    "format": "prettier src --write",
     "lint": "npm run lint-eslint && npm run lint-stylelint",
     "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src"
   },
