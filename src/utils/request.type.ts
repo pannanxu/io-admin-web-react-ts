@@ -1,5 +1,3 @@
-import { AxiosPromise } from 'axios'
-
 /**
  * 响应实体
  */
@@ -15,7 +13,7 @@ export interface IResponse<T> {
   /**
    * 响应数据
    */
-  data: AxiosPromise<T>
+  data: T
 }
 
 /**
