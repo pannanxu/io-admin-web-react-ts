@@ -17,7 +17,8 @@ request.interceptors.request.use(
     // 配置代理后，在这里统一设置前缀，不必在api中每个都添加
     config.url = '/api' + config.url
     // 设置统一header头
-    config.headers.token = 'token'
+    config.headers['Authorization'] =
+      'Bearer eyJhbGciOiJSUzI1NiJ9.eyJERVRBSUxTIjoie1wiYWNjb3VudE5vbkV4cGlyZWRcIjp0cnVlLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiZW5hYmxlZFwiOnRydWUsXCJpZFwiOjEsXCJyb2xlc1wiOltcInJvbGVfYWRtaW5cIixcInJvbGVfdXNlclwiXSxcInVzZXJuYW1lXCI6XCJyb290XCJ9IiwiZXhwIjoxNjI0MDI1Mzc2fQ.azHQZYjRxvcN4KYpOl7DcK79HEck9x8mLXMZSvNNBox-M9ILiU8piXlL_OwgUO37MxhyEmIac8KAHj9KNrDLK2o3OjKJRF6JqptuVS1AcfjZ_tCd8ubFbwr67SjoecG1SRVrthXAlX2_yJrv_Xp2gdn83L-djyzHhdWPiKYZ04s'
     return config
   },
   (error: AxiosError) => {
@@ -31,11 +32,11 @@ request.interceptors.response.use(
   (resp: AxiosResponse<IResponse<any>>) => {
     const { data } = resp
 
-    if (data.code !== 0) {
+    if (data.code !== 200) {
       message.error(data.msg)
     }
 
-    return data as any
+    return data.data as any
   },
   (error: AxiosError) => {
     message.error(error.message)

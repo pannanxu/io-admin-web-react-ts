@@ -1,26 +1,15 @@
 import React, { memo } from 'react'
 
 import { Layout } from 'antd'
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
-import { getMenusList } from '@/api/system'
+import { HeaderWrapper } from '@/layout/header/style'
 
-interface IProperties {
-  toggle: any
-  collapsed: boolean
-}
+interface IProperties {}
 
-const Header: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement => {
-  getMenusList().then((res) => {
-    console.log(res)
-  })
-
+const Header: React.FC<IProperties> = (props): React.ReactElement => {
   return (
-    <Layout.Header className="site-layout-background" style={{ padding: 0 }}>
-      {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-        className: 'trigger',
-        onClick: toggle,
-      })}
-    </Layout.Header>
+    <HeaderWrapper>
+      <Layout.Header>hello</Layout.Header>
+    </HeaderWrapper>
   )
 }
 

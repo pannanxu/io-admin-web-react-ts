@@ -10,7 +10,7 @@ import Side from '@/layout/sider'
 import Main from './main'
 import Footer from './footer'
 
-import { Wrapper } from '@/layout/style'
+import { LayoutGlobalStyle, RightWrapper, Wrapper } from '@/layout/style'
 
 interface IRoute {
   routers: RouterType[]
@@ -26,10 +26,6 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
 
   const dispatch: Dispatch = useDispatch()
 
-  const toggleFromMain = useCallback(() => {
-    updateCollapsed(collapsed)
-  }, [collapsed])
-
   const toggleFromSide = useCallback(
     (prop) => {
       updateCollapsed(!prop)
@@ -44,16 +40,19 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
 
   return (
     <Wrapper marginLeft={marginLeft}>
-      <LayoutAnt>
-        <Side toggle={toggleFromSide} collapsed={collapsed} />
-        <Main toggle={toggleFromMain} collapsed={collapsed}>
-          {renderRoutes({
-            routers: route.routers,
-            extraProps: { dispatch },
-          })}
-        </Main>
-        <Footer />
-      </LayoutAnt>
+      <LayoutGlobalStyle />
+      <Side toggle={toggleFromSide} collapsed={collapsed} dispatch={dispatch} />
+      <RightWrapper calcWidth={!collapsed ? 200 : 80}>
+        <LayoutAnt>
+          <Main>
+            {renderRoutes({
+              routers: route.routers,
+              extraProps: { dispatch },
+            })}
+          </Main>
+          <Footer />
+        </LayoutAnt>
+      </RightWrapper>
     </Wrapper>
   )
 }

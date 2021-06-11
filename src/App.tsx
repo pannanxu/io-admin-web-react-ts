@@ -14,7 +14,7 @@ function App() {
   return (
     <Provider store={store}>
       {/* 全局css样式 */}
-      <GlobalStyle/>
+      <GlobalStyle />
       <Router>{renderRoutes({ routers })}</Router>
     </Provider>
   )

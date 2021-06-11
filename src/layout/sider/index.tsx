@@ -1,16 +1,35 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
+import { useSelector, shallowEqual } from 'react-redux'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons'
+import { UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
+import { getMenusAction } from '@/store/modules/layout/action'
 
-interface IProperties {
+import { MENUS_CONSTANTS } from '@/store/modules/layout/constants'
+import { IMenus } from '@/models/ISidebar'
+
+interface IProperties extends RouteComponentProps {
   collapsed: boolean
   toggle: any
+  dispatch: any
 }
 
-const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement => {
+const Side: React.FC<IProperties> = ({ toggle, collapsed, dispatch, location, history }): React.ReactElement => {
+  useEffect(() => {
+    dispatch(getMenusAction())
+  }, [])
+
+  const { menus = [] } = useSelector(
+    (state: any) => ({
+      menus: state.getIn(['layoutReducer', MENUS_CONSTANTS]) as IMenus[],
+    }),
+    shallowEqual,
+  )
+
   return (
     <Layout.Sider
-      trigger={null}
+      trigger={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      onCollapse={() => toggle(!collapsed)}
       collapsible
       collapsed={collapsed}
       breakpoint="lg"
@@ -19,19 +38,20 @@ const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement 
       }}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1" icon={<UserOutlined />}>
-          nav 1
-        </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          nav 2
-        </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined />}>
-          nav 3
-        </Menu.Item>
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[location.pathname]}>
+        {menus.map((menu) => (
+          <Menu.Item
+            key={menu.uri}
+            className={menu.icon}
+            icon={<UserOutlined />}
+            onClick={() => history.push(menu.uri)}
+          >
+            {menu.title}
+          </Menu.Item>
+        ))}
       </Menu>
     </Layout.Sider>
   )
 }
 
-export default memo(Side)
+export default withRouter(memo(Side))

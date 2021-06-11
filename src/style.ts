@@ -51,4 +51,66 @@ export const GlobalStyle = createGlobalStyle`
 		text-decoration: none;
 		color: #fff;
 	}
+	
+	
+	
+	//enter是入场前的刹那（点击按钮），appear指页面第一次加载前的一刹那（自动）
+  .layout-enter, .layout-appear{
+    opacity:0;
+    transform: translateX(-20px);
+  }
+  //enter-active指入场后到入场结束的过程，appear-active则是页面第一次加载自动执行
+  .layout-enter-active, .layout-appear-active { 
+    opacity:1;
+    transform:translateX(0);
+    transition: all 1s ease-in;
+  }
+  //入场动画执行完毕后，保持状态
+  .layout-enter-done {
+    opacity: 1;
+    transform:translateX(0);
+  }
+  //同理，出场前的一刹那，以下就不详细解释了，一样的道理
+  .layout-exit {
+      opacity: 1;
+     transform:translateX(0);
+  }
+  .layout-exit-active {
+      opacity: 0;
+      transform:translateX(20px);
+      transition: all 1s ease-in;
+  }
+
+
+  /* 入场动画 fade-appear fade-appear-active 第一次才游泳*/
+  .fade-enter, .fade-appear{
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 1s ease-in;
+  }
+  .fade-enter-active, .fade-appear-active{
+    opacity: 1;
+    transform: translateX(0px);
+    transition: all 1s ease-in;
+  }
+  .fade-enter-done{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  
+  /* 出场动画 */
+  .fade-exit{
+    opacity: 1;
+    transform: translateX(0px);
+    transition: all 1s ease-in;
+  }
+  .fade-exit-active{
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 1s ease-in;
+  }
+  .fade-exit-done{
+    opacity: 0;
+    transform: translateX(20px);
+  }
 `

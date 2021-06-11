@@ -17,7 +17,7 @@ export default defineConfig({
     // https://cn.vitejs.dev/config/#server-proxy
     proxy: {
       '/api': {
-        target: 'https://baidu.com',
+        target: 'http://127.0.0.1:8081',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

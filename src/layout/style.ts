@@ -1,21 +1,10 @@
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 interface IProperties {
   marginLeft: number
 }
 
 export const Wrapper = styled.div<IProperties>`
-  .trigger {
-    padding: 0 24px;
-    font-size: 18px;
-    line-height: 64px;
-    cursor: pointer;
-    transition: color 0.3s;
-    :hover {
-      color: #1890ff;
-    }
-  }
-
   .logo {
     height: 32px;
     margin: 16px;
@@ -28,23 +17,49 @@ export const Wrapper = styled.div<IProperties>`
     position: fixed;
     left: 0;
   }
+`
 
-  .site-layout {
-    margin-left: ${(props) => props.marginLeft}px;
-    margin-right: 16px;
-    transition: margin-left 0.3s;
+interface RightWrapperType {
+  calcWidth: number
+}
 
-    .ant-layout-header {
-      margin-bottom: 24px;
-    }
+export const RightWrapper = styled.div<RightWrapperType>`
+  position: relative;
+  width: calc(100% - ${(props) => props.calcWidth}px);
+  float: right;
+  transition: width 0.3s;
+`
 
-    .ant-layout-content {
-      min-height: 80vh;
-      padding: 24px;
-    }
-
-    .site-layout-background {
-      background: #fff;
-    }
+export const LayoutGlobalStyle = createGlobalStyle`
+  .ant-layout-header {
+    background-color: #fff;
   }
+  
+  .route {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+   
+  // 帧动画
+  .fade-enter {
+    opacity: 0;
+  }
+   
+  .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+  }
+   
+  .fade-exit {
+    opacity: 1;
+  }
+   
+  .fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+  }
+  
 `

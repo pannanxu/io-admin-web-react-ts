@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import * as routerDom from 'react-router-dom'
 import { RouterType } from '@/router/router.type'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 interface IProperties {
   routers?: RouterType[]
@@ -48,5 +49,28 @@ const renderRoutes: FC<IProperties> = ({
     ))}
   </routerDom.Switch>
 )
+
+export const AnimationGo = (props: any) => {
+  const { children } = props
+  // 根据动作自行判断前进和后退
+  // 使用React.cloneElement API对props中的classNames这一props进行修改
+  return (
+    <routerDom.Route
+      render={({ location }) => (
+        <TransitionGroup
+          childFactory={(child) =>
+            React.cloneElement(child, {
+              classNames: 'fade',
+            })
+          }
+        >
+          <CSSTransition timeout={1000} key={location.pathname}>
+            {children}
+          </CSSTransition>
+        </TransitionGroup>
+      )}
+    />
+  )
+}
 
 export { renderRoutes }

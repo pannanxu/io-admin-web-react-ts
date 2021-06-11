@@ -37,7 +37,7 @@ export interface IMenus {
   /**
    * 扩展参数
    */
-  params: any
+  params: object
   /**
    * 是否展示
    */

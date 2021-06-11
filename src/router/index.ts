@@ -11,6 +11,11 @@ const routers: RouterType[] = [
     exact: true,
   },
   {
+    path: '/login',
+    component: React.lazy(() => import('@/pages/Login')),
+    exact: true,
+  },
+  {
     path: '/discover',
     component: Layout,
     routers: [
