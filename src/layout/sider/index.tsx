@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react'
-import { useSelector, shallowEqual } from 'react-redux'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { useLocation, useHistory } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import { getMenusAction } from '@/store/modules/layout/action'
@@ -8,23 +8,26 @@ import { getMenusAction } from '@/store/modules/layout/action'
 import { MENUS_CONSTANTS } from '@/store/modules/layout/constants'
 import { IMenus } from '@/models/ISidebar'
 
-interface IProperties extends RouteComponentProps {
+interface IProperties {
   collapsed: boolean
   toggle: any
-  dispatch: any
 }
 
-const Side: React.FC<IProperties> = ({ toggle, collapsed, dispatch, location, history }): React.ReactElement => {
-  useEffect(() => {
-    dispatch(getMenusAction())
-  }, [])
+const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
 
-  const { menus = [] } = useSelector(
+  const { menus } = useSelector(
     (state: any) => ({
-      menus: state.getIn(['layoutReducer', MENUS_CONSTANTS]) as IMenus[],
+      menus: state.getIn(['layoutReducer', MENUS_CONSTANTS]),
     }),
     shallowEqual,
   )
+
+  useEffect(() => {
+    dispatch(getMenusAction())
+  }, [])
 
   return (
     <Layout.Sider
@@ -39,7 +42,7 @@ const Side: React.FC<IProperties> = ({ toggle, collapsed, dispatch, location, hi
     >
       <div className="logo" />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[location.pathname]}>
-        {menus.map((menu) => (
+        {menus?.toJS().map((menu: IMenus) => (
           <Menu.Item
             key={menu.uri}
             className={menu.icon}
@@ -54,4 +57,4 @@ const Side: React.FC<IProperties> = ({ toggle, collapsed, dispatch, location, hi
   )
 }
 
-export default withRouter(memo(Side))
+export default memo(Side)

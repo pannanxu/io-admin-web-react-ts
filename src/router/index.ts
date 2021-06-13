@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from '@/layout'
+import Login from '@/pages/Login'
 
 import { RouterType } from '@/router/router.type'
 
@@ -12,7 +13,7 @@ const routers: RouterType[] = [
   },
   {
     path: '/login',
-    component: React.lazy(() => import('@/pages/Login')),
+    component: Login,
     exact: true,
   },
   {

@@ -31,7 +31,7 @@ export interface IRequest<T> {
   /**
    * POST | PUT Body
    */
-  body?: T
+  data?: any
   /**
    * headers
    */

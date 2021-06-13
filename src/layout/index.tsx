@@ -1,7 +1,5 @@
 import React, { memo, useState, useCallback } from 'react'
 
-import { Dispatch } from 'redux'
-import { useDispatch } from 'react-redux'
 import { Layout as LayoutAnt } from 'antd'
 
 import { renderRoutes } from '@/utils/renderRoutes'
@@ -24,8 +22,6 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
   const [collapsed, setCollapsed] = useState(false)
   const [marginLeft, setMarginLeft] = useState(220)
 
-  const dispatch: Dispatch = useDispatch()
-
   const toggleFromSide = useCallback(
     (prop) => {
       updateCollapsed(!prop)
@@ -41,15 +37,10 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
   return (
     <Wrapper marginLeft={marginLeft}>
       <LayoutGlobalStyle />
-      <Side toggle={toggleFromSide} collapsed={collapsed} dispatch={dispatch} />
+      <Side toggle={toggleFromSide} collapsed={collapsed} />
       <RightWrapper calcWidth={!collapsed ? 200 : 80}>
         <LayoutAnt>
-          <Main>
-            {renderRoutes({
-              routers: route.routers,
-              extraProps: { dispatch },
-            })}
-          </Main>
+          <Main>{renderRoutes({ routers: route.routers })}</Main>
           <Footer />
         </LayoutAnt>
       </RightWrapper>

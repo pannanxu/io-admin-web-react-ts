@@ -1,8 +1,6 @@
 import React, { memo } from 'react'
 
-interface IProperties {
-  dispatch: any
-}
+interface IProperties {}
 
 const Discover: React.FC<IProperties> = ({}): React.ReactElement => {
   return <div>Discover</div>
