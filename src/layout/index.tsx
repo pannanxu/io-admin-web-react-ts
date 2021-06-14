@@ -15,10 +15,11 @@ interface IRoute {
 }
 
 interface IProperties {
-  route: IRoute
+  route?: IRoute
+  children?: any
 }
 
-const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
+const Layout: React.FC<IProperties> = ({ route, children }): React.ReactElement => {
   const [collapsed, setCollapsed] = useState(false)
   const [marginLeft, setMarginLeft] = useState(220)
 
@@ -33,14 +34,13 @@ const Layout: React.FC<IProperties> = ({ route }): React.ReactElement => {
     setCollapsed(!prop)
     setMarginLeft(prop ? 220 : 100)
   }
-
   return (
     <Wrapper marginLeft={marginLeft}>
       <LayoutGlobalStyle />
       <Side toggle={toggleFromSide} collapsed={collapsed} />
       <RightWrapper calcWidth={!collapsed ? 200 : 80}>
         <LayoutAnt>
-          <Main>{renderRoutes({ routers: route.routers })}</Main>
+          <Main>{route ? renderRoutes({ routers: route.routers }) : children}</Main>
           <Footer />
         </LayoutAnt>
       </RightWrapper>

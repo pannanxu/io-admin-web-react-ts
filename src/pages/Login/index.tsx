@@ -2,9 +2,9 @@ import React, { memo, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Row, Col, message } from 'antd'
 import { ICaptcha, ILoginSubmit } from '@/models/ILogin'
-import { loginSubmit } from '@/api/system'
+import { getMenusList, loginSubmit } from '@/api/system'
 import { getCaptcha } from '@/api/system'
-import { setToken } from '@/utils/tokenUtil'
+import { removeToken, setMenus, setToken } from '@/utils/localStoreUtil'
 
 interface IProperties {}
 
@@ -33,11 +33,19 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
   const onFinish = (values: ILoginSubmit) => {
     loginSubmit(values, { key: captcha.key, code: values.code }).then((res) => {
       if (res) {
-        message.success('登陆成功')
         setToken(res)
-        setTimeout(() => {
-          history.push('/')
-        }, 500)
+        getMenusList().then((menus) => {
+          if (menus) {
+            message.success('登陆成功')
+            setMenus(JSON.stringify(menus))
+            setTimeout(() => {
+              history.push('/')
+            }, 500)
+          } else {
+            message.error('没有可用的资源权限')
+            removeToken()
+          }
+        })
       }
     })
   }

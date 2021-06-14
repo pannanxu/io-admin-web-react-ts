@@ -6,7 +6,6 @@ export interface RouterType {
   strict?: false
   redirect?: string
   meta?: {
-    requiresAuth?: false
     title?: string
     roles?: string[]
   }

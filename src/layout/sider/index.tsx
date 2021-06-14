@@ -1,12 +1,12 @@
-import React, { memo, useEffect } from 'react'
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import React, { memo, useState, useEffect } from 'react'
+// import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useLocation, useHistory } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
-import { getMenusAction } from '@/store/modules/layout/action'
-
-import { MENUS_CONSTANTS } from '@/store/modules/layout/constants'
+// import { getMenusAction } from '@/store/modules/layout/action'
+// import { MENUS_CONSTANTS } from '@/store/modules/layout/constants'
 import { IMenus } from '@/models/ISidebar'
+import { getMenus } from '@/utils/localStoreUtil'
 
 interface IProperties {
   collapsed: boolean
@@ -14,19 +14,22 @@ interface IProperties {
 }
 
 const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
 
-  const { menus } = useSelector(
-    (state: any) => ({
-      menus: state.getIn(['layoutReducer', MENUS_CONSTANTS]),
-    }),
-    shallowEqual,
-  )
+  const [menus, setMenus] = useState([] as IMenus[])
+
+  // const { menus } = useSelector(
+  //   (state: any) => ({
+  //     menus: state.getIn(['layoutReducer', MENUS_CONSTANTS]),
+  //   }),
+  //   shallowEqual,
+  // )
 
   useEffect(() => {
-    dispatch(getMenusAction())
+    // dispatch(getMenusAction())
+    setMenus(getMenus())
   }, [])
 
   return (
@@ -42,7 +45,7 @@ const Side: React.FC<IProperties> = ({ toggle, collapsed }): React.ReactElement 
     >
       <div className="logo" />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={[location.pathname]}>
-        {menus?.toJS().map((menu: IMenus) => (
+        {menus.map((menu: IMenus) => (
           <Menu.Item
             key={menu.uri}
             className={menu.icon}

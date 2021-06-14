@@ -5,7 +5,7 @@ import { IMenus } from '@/models/ISidebar'
 import { MENUS_CONSTANTS, IS_LOGIN_CONSTANTS } from './constants'
 
 import { getMenusList } from '@/api/system'
-import { hasToken } from '@/utils/tokenUtil'
+import { hasToken, setMenus } from '@/utils/localStoreUtil'
 
 const changeMenusAction = (menus: IMenus[]) => ({
   type: MENUS_CONSTANTS,
@@ -14,6 +14,7 @@ const changeMenusAction = (menus: IMenus[]) => ({
 
 export const getMenusAction = () => (dispatch: Dispatch) => {
   getMenusList().then((menus) => {
+    setMenus(JSON.stringify(menus))
     dispatch(changeMenusAction(menus))
   })
 }

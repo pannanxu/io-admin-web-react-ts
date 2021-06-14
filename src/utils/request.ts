@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import { IRequest, IResponse } from '@/utils/request.type'
 import { message } from 'antd'
-import { getToken, hasToken } from '@/utils/tokenUtil'
+import { getToken, hasToken, removeToken } from '@/utils/localStoreUtil'
 
 // https://cn.vitejs.dev/guide/env-and-mode.html#env-variables
 const isDevelopment = import.meta.env.DEV
@@ -40,6 +40,11 @@ request.interceptors.response.use(
       message.error(msg)
     }
 
+    if (window.location.pathname !== '/login' && code === 401) {
+      removeToken()
+      window.href = '/login'
+    }
+
     return data as any
   },
   (error: AxiosError) => {
@@ -66,7 +71,7 @@ const put = ({ url, data, params, headers }: IRequest<any>): Promise<any> => {
 
 const http = ({ url, data, params, method, headers }: IRequest<any>): Promise<any> => {
   return new Promise((resolve) => {
-    request({ url, params, method, headers })
+    request({ url, data, params, method, headers })
       .then((res) => resolve(res))
       .catch((e) => console.error(e))
   })

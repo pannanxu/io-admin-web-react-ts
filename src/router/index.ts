@@ -3,6 +3,19 @@ import Layout from '@/layout'
 import Login from '@/pages/Login'
 
 import { RouterType } from '@/router/router.type'
+import NoPage from '@/pages/NoPage'
+
+export const noPermissionRouters: RouterType[] = [
+  {
+    path: '/login',
+    component: Login,
+    exact: true,
+  },
+  {
+    path: '',
+    component: NoPage,
+  },
+]
 
 const routers: RouterType[] = [
   {
@@ -12,8 +25,9 @@ const routers: RouterType[] = [
     exact: true,
   },
   {
-    path: '/login',
-    component: Login,
+    path: '/discover',
+    component: Layout,
+    redirect: '/discover/discover',
     exact: true,
   },
   {
@@ -37,6 +51,7 @@ const routers: RouterType[] = [
       },
     ],
   },
+  ...noPermissionRouters,
 ]
 
 export default routers
