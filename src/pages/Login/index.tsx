@@ -1,20 +1,15 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Form, Input, Button, Row, Col, message } from 'antd'
+import { message } from 'antd'
+import ProForm, { ProFormText } from '@ant-design/pro-form'
+import { MobileOutlined } from '@ant-design/icons'
+
 import { ICaptcha, ILoginSubmit } from '@/models/ILogin'
 import { getMenusList, loginSubmit } from '@/api/system'
 import { getCaptcha } from '@/api/system'
 import { removeToken, setMenus, setToken } from '@/utils/localStoreUtil'
 
 interface IProperties {}
-
-const layout = {
-  labelCol: { span: 10 },
-  wrapperCol: { span: 5 },
-}
-const tailLayout = {
-  wrapperCol: { offset: 10, span: 5 },
-}
 
 const Login: React.FC<IProperties> = (props): React.ReactElement => {
   const history = useHistory()
@@ -30,7 +25,7 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
     })
   }
 
-  const onFinish = (values: ILoginSubmit) => {
+  const onFinish = (values: ILoginSubmit | any): any => {
     loginSubmit(values, { key: captcha.key, code: values.code }).then((res) => {
       if (res) {
         setToken(res)
@@ -50,54 +45,98 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
     })
   }
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
   return (
     <div>
-      <Form
-        {...layout}
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+      <div
+        style={{
+          width: 330,
+          margin: 'auto',
+        }}
       >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+        <ProForm
+          onFinish={onFinish}
+          submitter={{
+            searchConfig: {
+              submitText: '登录',
+            },
+            render: (_: any, dom: any) => dom.pop(),
+            submitButtonProps: {
+              size: 'large',
+              style: {
+                width: '100%',
+              },
+            },
+          }}
         >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item name="code" noStyle rules={[{ required: true, message: 'Please input the captcha you got!' }]}>
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <img src={captcha.image} alt="" onClick={getCaptchaHandler} />
-            </Col>
-          </Row>
-        </Form.Item>
-
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            登陆
-          </Button>
-        </Form.Item>
-      </Form>
+          <h1
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            <img
+              style={{
+                height: '44px',
+                marginRight: 16,
+              }}
+              alt="logo"
+              src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+            />
+            Ant Design
+          </h1>
+          <div
+            style={{
+              marginTop: 12,
+              textAlign: 'center',
+              marginBottom: 40,
+            }}
+          >
+            Ant Design 是西湖区最具影响力的 Web 设计规范
+          </div>
+          <ProFormText
+            fieldProps={{
+              size: 'large',
+              prefix: <MobileOutlined />,
+            }}
+            name="username"
+            placeholder="请输入用户名"
+            rules={[
+              {
+                required: true,
+                message: '请输入用户名!',
+              },
+            ]}
+          />
+          <ProFormText
+            fieldProps={{
+              size: 'large',
+              prefix: <MobileOutlined />,
+            }}
+            name="password"
+            placeholder="请输入密码"
+            rules={[
+              {
+                required: true,
+                message: '请输入密码!',
+              },
+            ]}
+          />
+          <ProFormText
+            fieldProps={{
+              size: 'large',
+              prefix: <MobileOutlined />,
+            }}
+            name="code"
+            placeholder="请输入验证码"
+            rules={[
+              {
+                required: true,
+                message: '请输入验证码!',
+              },
+            ]}
+          />
+          <img src={captcha.image} alt="" onClick={getCaptchaHandler} />
+        </ProForm>
+      </div>
     </div>
   )
 }

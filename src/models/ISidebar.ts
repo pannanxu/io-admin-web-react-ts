@@ -50,4 +50,6 @@ export interface IMenus {
    * 排序
    */
   menuSort: number
+
+  children: IMenus[]
 }

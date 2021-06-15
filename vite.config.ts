@@ -1,11 +1,22 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import tsconfigPaths from 'vite-tsconfig-paths';
+import vitePluginImp from 'vite-plugin-imp'
 import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     reactRefresh(),
+    tsconfigPaths(),
+    vitePluginImp({
+      libList: [
+        {
+          libName: 'antd',
+          style: (name: string) => `antd/es/${name}/style`,
+        },
+      ],
+    }),
   ],
   server: {
     // IP
@@ -26,9 +37,24 @@ export default defineConfig({
   // 设置uri前缀, 设置前: http://127.0.0.1:3000/home、设置后: http://127.0.0.1:3000/io-admin/home
   // base: '/io-admin/',
   resolve: {
-    // 配置别名
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
+    // // 配置别名
+    // alias: {
+    //   '@': path.resolve(__dirname, 'src'),
+    // },
+    alias: [
+      // 修复 antD components 样式导入失败
+      // https://github.com/vitejs/vite/issues/2185#issuecomment-784637827
+      { find: /^~/, replacement: '' },
+    ]
+  },
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
     },
   },
 })

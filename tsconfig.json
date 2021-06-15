@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      // 配置别名，对应 vite.config.ts 也要配置
       "@/*": [
         "src/*"
       ]
