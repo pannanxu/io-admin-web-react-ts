@@ -12,6 +12,7 @@
     "@ant-design/icons": "^4.6.2",
     "@ant-design/pro-form": "^1.29.0",
     "@ant-design/pro-layout": "^6.19.5",
+    "@types/redux-immutable": "^4.0.1",
     "antd": "^4.16.2",
     "axios": "^0.21.1",
     "immutable": "^4.0.0-rc.12",

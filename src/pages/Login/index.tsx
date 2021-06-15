@@ -5,11 +5,12 @@ import ProForm, { ProFormText } from '@ant-design/pro-form'
 import { MobileOutlined } from '@ant-design/icons'
 
 import { ICaptcha, ILoginSubmit } from '@/models/ILogin'
-import { getMenusList, loginSubmit } from '@/api/system'
+import { getPermissionsByUserRole, loginSubmit } from '@/api/system'
 import { getCaptcha } from '@/api/system'
-import { removeToken, setMenus, setToken } from '@/utils/localStoreUtil'
+import { setPermissions, setToken } from '@/utils/localStoreUtil'
 
-interface IProperties {}
+interface IProperties {
+}
 
 const Login: React.FC<IProperties> = (props): React.ReactElement => {
   const history = useHistory()
@@ -29,17 +30,12 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
     loginSubmit(values, { key: captcha.key, code: values.code }).then((res) => {
       if (res) {
         setToken(res)
-        getMenusList().then((menus) => {
-          if (menus) {
-            message.success('登陆成功')
-            setMenus(JSON.stringify(menus))
-            setTimeout(() => {
-              history.push('/')
-            }, 500)
-          } else {
-            message.error('没有可用的资源权限')
-            removeToken()
-          }
+        getPermissionsByUserRole().then((permissions) => {
+          message.success('登陆成功')
+          setPermissions(permissions)
+          setTimeout(() => {
+            history.replace('/')
+          }, 500)
         })
       }
     })
@@ -95,7 +91,7 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
           <ProFormText
             fieldProps={{
               size: 'large',
-              prefix: <MobileOutlined />,
+              prefix: <MobileOutlined/>,
             }}
             name="username"
             placeholder="请输入用户名"
@@ -109,7 +105,7 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
           <ProFormText
             fieldProps={{
               size: 'large',
-              prefix: <MobileOutlined />,
+              prefix: <MobileOutlined/>,
             }}
             name="password"
             placeholder="请输入密码"
@@ -123,7 +119,7 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
           <ProFormText
             fieldProps={{
               size: 'large',
-              prefix: <MobileOutlined />,
+              prefix: <MobileOutlined/>,
             }}
             name="code"
             placeholder="请输入验证码"
@@ -134,7 +130,7 @@ const Login: React.FC<IProperties> = (props): React.ReactElement => {
               },
             ]}
           />
-          <img src={captcha.image} alt="" onClick={getCaptchaHandler} />
+          <img src={captcha.image} alt="" onClick={getCaptchaHandler}/>
         </ProForm>
       </div>
     </div>
