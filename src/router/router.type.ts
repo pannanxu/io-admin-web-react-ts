@@ -10,4 +10,5 @@ export interface RouterType {
   name?: string
   readonly permissions?: string[]
   onEnter?: any
+  render?: any
 }

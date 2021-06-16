@@ -36,13 +36,14 @@ request.interceptors.response.use(
       data: { code, msg, data },
     } = resp
 
-    if (code !== 200) {
-      message.error(msg)
-    }
-
     if (window.location.pathname !== '/login' && code === 401) {
       removeToken()
       window.href = '/login'
+      return
+    }
+
+    if (code !== 200) {
+      message.error(msg)
     }
 
     return data as any

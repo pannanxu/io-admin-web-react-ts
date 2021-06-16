@@ -15,8 +15,14 @@ export const noPermission: RouterType[] = [
   },
   {
     path: '/404',
-    component: NoPage,
-    isShow: false,
+    component: Layout,
+    children: [
+      {
+        key: '404',
+        component: NoPage,
+        isShow: false,
+      }
+    ]
   },
 ]
 
@@ -40,10 +46,10 @@ const routers: RouterType[] = [
   {
     path: '/discover',
     key: '/discover',
+    name: '仪表盘',
     component: Layout,
     isShow: true,
-    name: '仪表盘',
-    permissions: ['get:discover', 'get:discover:discover', 'get:discover:test', 'get:discover:home'],
+    permissions: ['get'],
     children: [
       {
         path: '/discover/discover',
@@ -52,7 +58,7 @@ const routers: RouterType[] = [
         exact: true,
         name: '仪表盘',
         isShow: true,
-        permissions: ['get:discover:discover'],
+        permissions: ['get:discover'],
       },
       {
         path: '/discover/test',

@@ -1,13 +1,11 @@
 import React from 'react'
 
 import { HashRouter as Router } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
+import renderRoutes from '@/router/renderRoutes'
 import { Provider } from 'react-redux'
 import routers from './router'
 
 import store from './store'
-
-import { GlobalStyle } from '@/style'
 
 function App() {
   return (
